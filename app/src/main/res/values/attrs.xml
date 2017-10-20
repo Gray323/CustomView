@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 圆形进度条 -->
+    <declare-styleable name="CustomProgressBar">
+        <attr name="fistColor" format="color|reference" />
+        <attr name="secondColor" format="color|reference" />
+        <attr name="circleWidth" format="dimension|reference"/>
+        <attr name="speend" format="integer|reference"/>
+    </declare-styleable>
+
+    <!-- 音量显示控件 -->
+    <declare-styleable name="CustomVolumControlBar">
+        <attr name="mfirstColor" format="color|reference" />
+        <attr name="msecondColor" format="color|reference" />
+        <attr name="mcircleWidth" format="dimension|reference" />
+        <attr name="dotCount" format="integer|reference" />
+        <attr name="splitSize" format="integer|reference" />
+        <attr name="bg" format="reference" />
+    </declare-styleable>
+
+    <!-- 手势锁 -->
+    <declare-styleable name="GestureLockViewGroup" >
+        <attr name="color_no_finger_inner_circle" format="color|reference" />
+        <attr name="color_no_finger_outer_circle" format="color|reference" />
+        <attr name="color_finger_on" format="color|reference" />
+        <attr name="color_finger_up" format="color|reference" />
+        <attr name="count" format="integer|reference" />
+        <attr name="tryTimes" format="integer" />
+    </declare-styleable>
+    
+</resources>
