@@ -249,7 +249,6 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
 
         mSpeed = (float) (v1 + Math.random() * (v2 - v1));
         isShouldEnd = false;
-
     }
 
     public void luckyEnd()

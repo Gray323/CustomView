@@ -28,4 +28,20 @@
         <attr name="tryTimes" format="integer" />
     </declare-styleable>
     
+    <declare-styleable name="TickView">
+        <!-- 没有选中的颜色基调 -->
+        <attr name="uncheck_base_color" format="color|reference" />
+        <!-- 选中的颜色基调 -->
+        <attr name="check_base_color" format="color|reference" />
+        <!-- 选中后勾的颜色 -->
+        <attr name="check_tick_color" format="color|reference" />
+        <!-- 圆的半径 -->
+        <attr name="radius" format="dimension|reference" />
+        <attr name="rate">
+            <enum name="slow" value="0" />
+            <enum name="normal" value="1" />
+            <enum name="fase" value="2" />
+        </attr>
+    </declare-styleable>
+    
 </resources>
