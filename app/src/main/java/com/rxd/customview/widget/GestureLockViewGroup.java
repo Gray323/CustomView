@@ -2,10 +2,12 @@ package com.rxd.customview.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.Point;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -13,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.rxd.customview.R;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -23,7 +26,7 @@ public class GestureLockViewGroup extends RelativeLayout{
 
     private GestureLockView[] mGestureLockViews;//保存所有的GestureLockView
     private int mCount = 4;//每个边上的GestureLockView个数
-    private int[] mAnswer = {0, 1, 2, 5, 8};//存储答案
+    private int[] mAnswer = {1};//存储答案
     private List<Integer> mChoose = new ArrayList<>();//保存用户所选的Id
     private Paint mPaint;
     private int mMarginBetweenLockView = 30;//每个GestureLockView中间的间距，设置为mGestureLockViewWidth * 25%
@@ -159,7 +162,6 @@ public class GestureLockViewGroup extends RelativeLayout{
                         }else{//否则，用线将两者连上
                             mPath.lineTo(mLastPathX, mLastPathY);
                         }
-
                     }
                 }
 
@@ -200,7 +202,7 @@ public class GestureLockViewGroup extends RelativeLayout{
                     int dy = nextChild.getTop() - startChild.getTop();
 
                     //计算角度
-                    int angle = (int) Math.toDegrees(Math.atan2(dy, dx) + 90);
+                    int angle = (int) Math.toDegrees(Math.atan2(dy, dx)) + 90;
                     startChild.setmArrowDegree(angle);
                 }
                 break;
@@ -228,6 +230,8 @@ public class GestureLockViewGroup extends RelativeLayout{
      * @return
      */
     private boolean checkAnswer(){
+        Log.d("mAnswer", Arrays.toString(mAnswer));
+        Log.d("mAnswer", mChoose.toString());
         if (mAnswer.length != mChoose.size()){
             return false;
         }
@@ -274,13 +278,14 @@ public class GestureLockViewGroup extends RelativeLayout{
         return null;
     }
 
-    private void reset() {
+    public void reset() {
         mChoose.clear();
         mPath.reset();
         for (GestureLockView view : mGestureLockViews){
             view.setMode(GestureLockView.Mode.STATUS_NO_FINGER);
             view.setmArrowDegree(-1);
         }
+        invalidate();
     }
 
     /**
@@ -296,19 +301,68 @@ public class GestureLockViewGroup extends RelativeLayout{
          * 单独选中元素的id
          * @param cId
          */
-        public void onBlockSelected(int cId);
+        void onBlockSelected(int cId);
 
         /**
          * 是否匹配
          * @param isMatched
          */
-        public void onGestureEvent(boolean isMatched);
+        void onGestureEvent(boolean isMatched);
 
         /**
          * 超过尝试次数
          */
-        public void onUnmatchedExceedBoundary();
+        void onUnmatchedExceedBoundary();
 
+    }
+
+    /**
+     * 设置正确答案
+     * @param answer
+     */
+    public void setAnswer(int[] answer){
+        try {
+            boolean isCorrect = true;
+
+            if (answer.length > 9){
+                throw new AnswerNotLegalException("答案长度不能超过9位,使用了默认密码{1}");
+            }
+
+            for(int i = 0; i < answer.length; i++){
+                if (answer[i] != 1 && answer[i] != 2 && answer[i] != 3 && answer[i] != 4 && answer[i] != 5
+                        && answer[i] != 6 && answer[i] != 7 && answer[i] != 8 && answer[i] != 9){
+                    isCorrect = false;
+                }
+            }
+
+            if (isCorrect){
+                this.mAnswer = answer;
+                invalidate();
+            }else{
+                throw new AnswerNotLegalException("答案中只能包含1-9,使用了默认密码{1}");
+            }
+        }catch (AnswerNotLegalException e){
+            e.printStackTrace();
+        }
+
+    }
+
+    @Override
+    protected void dispatchDraw(Canvas canvas) {
+        super.dispatchDraw(canvas);
+        //绘制GestureLockView之间的连线
+        if (mPath != null){
+            canvas.drawPath(mPath, mPaint);
+        }
+        if(mChoose.size() > 0){
+            if(mLastPathX != 0 && mLastPathY != 0){
+                canvas.drawLine(mLastPathX, mLastPathY, mTmpTarget.x, mTmpTarget.y, mPaint);
+            }
+        }
+    }
+
+    public void setTryTimes(int mTryTimes){
+        this.mTryTimes = mTryTimes;
     }
 
 }

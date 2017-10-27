@@ -13,6 +13,7 @@
        android:layout_height="150dp" />
 
    <com.rxd.customview.widget.GestureLockViewGroup
+       android:id="@+id/gestureLockViewGroup"
        android:layout_width="match_parent"
        android:layout_height="match_parent"></com.rxd.customview.widget.GestureLockViewGroup>
 

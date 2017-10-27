@@ -127,6 +127,9 @@ public class GestureLockView extends View{
                 //绘制内圆
                 mPaint.setStyle(Paint.Style.FILL);
                 canvas.drawCircle(mCenterX, mCenterY, mRadius * mInnerCircleRadiusRate, mPaint);
+
+                drawArrow(canvas);
+
                 break;
             //当没有手指操作时
             case STATUS_NO_FINGER:
