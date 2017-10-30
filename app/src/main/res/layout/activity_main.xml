@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.rxd.customview.MainActivity"
+    tools:context="com.rxd.customview.ui.MainActivity"
     android:orientation="vertical">
 
    <TextView
@@ -12,9 +12,9 @@
        android:layout_width="match_parent"
        android:layout_height="150dp" />
 
-   <com.rxd.customview.widget.GestureLockViewGroup
+   <com.rxd.customview.widget.gesturelock.GestureLockViewGroup
        android:id="@+id/gestureLockViewGroup"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"></com.rxd.customview.widget.GestureLockViewGroup>
+       android:layout_height="match_parent"></com.rxd.customview.widget.gesturelock.GestureLockViewGroup>
 
 </LinearLayout>

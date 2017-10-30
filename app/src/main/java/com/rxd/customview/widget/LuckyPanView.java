@@ -140,6 +140,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
             mCanvas = mHolder.lockCanvas();
             if(mCanvas != null){
                 //绘制背景图
+
                 drawBg();
 
                 //绘制每个盘块，以及上面的文本和图片
@@ -171,6 +172,8 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
                 //计算所在区域
                 calInExactArea(mStartAngle);
 
+            }else{
+                Log.d("sc", "canvas为空");
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -225,6 +228,7 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
      * 绘制背景
      */
     private void drawBg() {
+        Log.d("sc", "绘制背景图");
         mCanvas.drawColor(0xFFFFFFFF);
         mCanvas.drawBitmap(mBgBitmap, null, new Rect(mPadding / 2, mPadding / 2,
                 getMeasuredWidth() - mPadding / 2, getMeasuredWidth() - mPadding / 2), null);
@@ -256,5 +260,16 @@ public class LuckyPanView extends SurfaceView implements SurfaceHolder.Callback,
         mStartAngle = 0;
         isShouldEnd = true;
     }
+
+    public boolean isStart()
+    {
+        return mSpeed != 0;
+    }
+
+    public boolean isShouldEnd()
+    {
+        return isShouldEnd;
+    }
+
 
 }

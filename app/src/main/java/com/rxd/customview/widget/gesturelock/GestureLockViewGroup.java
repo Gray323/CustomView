@@ -1,4 +1,4 @@
-package com.rxd.customview.widget;
+package com.rxd.customview.widget.gesturelock;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.rxd.customview.R;
+import com.rxd.customview.widget.AnswerNotLegalException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,6 +134,11 @@ public class GestureLockViewGroup extends RelativeLayout{
     @Override
     public boolean onTouchEvent(MotionEvent event) {
 
+        if (this.mTryTimes == 0){
+            listener.onUnmatchedExceedBoundary();
+            return true;
+        }
+
         int action = event.getAction();
         int x = (int) event.getX();
         int y = (int) event.getY();
@@ -178,9 +184,6 @@ public class GestureLockViewGroup extends RelativeLayout{
                 //回调是否成功
                 if (listener != null && mChoose.size() > 0){
                     listener.onGestureEvent(checkAnswer());
-                    if (this.mTryTimes == 0){
-                        listener.onUnmatchedExceedBoundary();
-                    }
                 }
 
                 //将终点设置位置为起点，即取现指引线

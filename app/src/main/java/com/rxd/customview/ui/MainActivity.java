@@ -1,4 +1,4 @@
-package com.rxd.customview;
+package com.rxd.customview.ui;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -7,7 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.rxd.customview.widget.GestureLockViewGroup;
+import com.rxd.customview.R;
+import com.rxd.customview.widget.gesturelock.GestureLockViewGroup;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //手势锁
         gestureLockViewGroup = (GestureLockViewGroup) findViewById(R.id.gestureLockViewGroup);
         gestureLockViewGroup.setAnswer(new int[]{1,2,3,4,5,6,7,8,9});
         gestureLockViewGroup.setTryTimes(1);

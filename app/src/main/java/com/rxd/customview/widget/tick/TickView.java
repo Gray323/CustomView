@@ -1,4 +1,4 @@
-package com.rxd.customview.widget;
+package com.rxd.customview.widget.tick;
 
 import android.animation.AnimatorSet;
 import android.content.Context;

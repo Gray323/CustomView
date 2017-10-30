@@ -1,4 +1,4 @@
-package com.rxd.customview.widget;
+package com.rxd.customview.widget.tick;
 
 /**
  * Created by Administrator on 2017/10/27.

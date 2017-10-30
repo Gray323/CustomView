@@ -1,4 +1,4 @@
-package com.rxd.customview.widget;
+package com.rxd.customview.widget.gesturelock;
 
 import android.content.Context;
 import android.graphics.Canvas;
